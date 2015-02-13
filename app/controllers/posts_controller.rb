@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
     def index
 
-      @posts = Post.new
+      @posts = Post.all
     # @current_page = params.fetch(:page, 0).to_i
     # @users = User.limit(20)
     #              .offset(20 * params[:page].to_i)
@@ -16,7 +16,7 @@ class PostsController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    @post = Post.new
   end
 
   # GET /users/1/edit
