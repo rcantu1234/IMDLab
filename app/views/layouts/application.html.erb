@@ -8,7 +8,22 @@
 </head>
 <body>
 
-<%= yield %>
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <p style='color: green;'><%= notice %></p>
+      <p style='color: red;'><%= alert %></p>
+
+      <nav>
+        <%= link_to 'HOME', posts_path %> |
+        <%= link_to 'NEW', new_post_path %>
+
+      </nav>
+
+      <%= yield %>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

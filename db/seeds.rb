@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+50.times do
+  Post.create({
+    movie_title: Faker::Name.title,
+    url: Faker::Internet.url
+    })
+end
