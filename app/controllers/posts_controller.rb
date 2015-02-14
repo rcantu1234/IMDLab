@@ -24,6 +24,20 @@ class PostsController < ApplicationController
   def edit
   end
 
+  def create
+    @post = Post.new(post_params)
+
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to user_image_path(current_user, @image), notice: 'Image was successfully created.' }
+        format.json { render :show, status: :created, location: @image }
+      else
+        format.html { render :new }
+        format.json { render json: @image.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
