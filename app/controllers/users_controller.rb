@@ -1,6 +1,16 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+
+  # GET /users
+  # GET /users.json
   def index
-    @users = User.all
+    @current_page = params.fetch(:page, 0).to_i
+    @users = User.limit(20)
+                 .offset(20 * params[:page].to_i)
+                 .order(params.fetch(:sort, :id))
+    # WE HAVE TO USE THE CODE BELOW SO THE SORT METHOD CAN WORK
+    #@users = User.order(:profile_name).page params[:page]
   end
 
   def new
