@@ -33,7 +33,7 @@
 <nav>
   <ul class='pagination'>
     <li class="<%= 'disabled' if @current_page <= 0 %>">
-      <%= link_to('Previous', (users_path(page: @current_page - 1) if @current_page > 0), :'aria-label' => 'Previous') %>
+      <%= link_to('Previous', (posts_path(page: @current_page - 1) if @current_page > 0), :'aria-label' => 'Previous') %>
     </li>
 
     <% ((@current_page - 2)..(@current_page + 2)).each do |page_num| %>
@@ -48,13 +48,13 @@
           <% if page_num < 0 %>
            <%= link_to('*', '#') %>
           <% else %>
-           <%= link_to(page_num, users_path(page: page_num)) %>
+           <%= link_to(page_num, posts_path(page: page_num)) %>
           <% end %>
         </li>
     <% end %>
 
-    <li class="<%= 'disabled' if @users.length > 0 %>">
-     <%= link_to('Next >', (users_path(page: @current_page + 1) if @users.length > 0), :'aria-label' => 'Next')  %>
+    <li class="<%= 'disabled' if @posts.length > 0 %>">
+     <%= link_to('Next >', (posts_path(page: @current_page + 1) if @posts.length > 0), :'aria-label' => 'Next')  %>
     </li>
 
   </ul>

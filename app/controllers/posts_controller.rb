@@ -2,14 +2,12 @@ class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit]
 
   def index
-
-      @posts = Post.all
     @current_page = params.fetch(:page, 0).to_i
-    @users = User.limit(20)
-                 .offset(20 * params[:page].to_i)
+    posts = Post.limit(15)
+                 .offset(15 * params[:page].to_i)
                  .order(params.fetch(:sort, :id))
-
-    @users = User.order(:profile_name).page params[:page]
+    # WE HAVE TO USE THE CODE BELOW SO THE SORT METHOD CAN WORK
+    @posts = Post.order(:url).page params[:page]
   end
 
   def show
@@ -30,11 +28,19 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def destroy
+    @post.destroy
+    respond_to do |format|
+      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 
