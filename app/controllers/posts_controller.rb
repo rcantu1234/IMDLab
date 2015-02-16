@@ -3,8 +3,8 @@ class PostsController < ApplicationController
 
   def index
     @current_page = params.fetch(:page, 0).to_i
-    posts = Post.limit(15)
-                 .offset(15 * params[:page].to_i)
+    posts = Post.limit(20)
+                 .offset(20 * params[:page].to_i)
                  .order(params.fetch(:sort, :id))
     # WE HAVE TO USE THE CODE BELOW SO THE SORT METHOD CAN WORK
     @posts = Post.order(:url).page params[:page]

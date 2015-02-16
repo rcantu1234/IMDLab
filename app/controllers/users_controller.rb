@@ -9,7 +9,6 @@ class UsersController < ApplicationController
     @users = User.limit(20)
                  .offset(20 * params[:page].to_i)
                  .order(params.fetch(:sort, :id))
-    # WE HAVE TO USE THE CODE BELOW SO THE SORT METHOD CAN WORK
     @users = User.order(:profile_name).page params[:page]
   end
 
